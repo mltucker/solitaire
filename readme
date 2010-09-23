@@ -1,0 +1,36 @@
+The board looks like this
+    x x x
+    x x x
+x x x x x x x
+x x x o x x x
+x x x x x x x
+    x x x
+    x x x
+
+One x can jump over another x if and only if the first will land in an o.  The second x is replaced by an o.
+
+We will model this as a grid, like so:
+
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x o x x x
+x x x x x x x
+: : x x x : :
+: : x x x : :
+
+so that there are 3 types of pieces: ':', 'x', and 'o'.
+
+The algorithm is as follows:
+
+enqueue(starting position)
+the best so far is the starting position.
+until queue is empty
+  dequeue a state
+  if this state has fewer pieces than the best so far, it is the new best.
+  for each x
+    for each direction
+      if state in direction is x and 2nd state in direction is o
+        create a new state by doing the jump
+        enqueue the new state

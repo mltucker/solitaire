@@ -1,0 +1,125 @@
+#!/usr/bin/env ruby
+
+OutOfBounds = 0 
+Unoccupied = 1
+Occupied = 2
+
+
+@length = 7
+
+##
+# Convert a string to a state
+def strstate(str)
+  state = []
+  lines = str.split("\n")
+  lines.each_with_index do |line, i|
+    pieces = line.split(' ')
+    pieces.each_with_index do |piece, j|
+      k = i*@length + j
+      state[k] = case piece
+                 when ':' then OutOfBounds
+                 when 'o' then Unoccupied
+                 when 'x' then Occupied
+                 end
+    end
+  end
+  state
+end
+
+##
+# Convert a state to a string
+def statestr(state)
+  (0...@length).collect { |i|
+    (0...@length).collect { |j|
+      k = i*@length + j
+      case state[k]
+      when OutOfBounds then ':'
+      when Unoccupied then 'o'
+      when Occupied then 'x'
+      end
+    }.join(' ')
+  }.join("\n")
+end
+
+startstr = <<EOF
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x o x x x
+x x x x x x x
+: : x x x : :
+: : x x x : :
+EOF
+
+start = strstate(startstr)
+
+def count(state)
+  state.inject(0) {|x, y| y == Occupied ? x + 1 : x}
+end
+
+states = [start]
+best = [start, count(start)]
+
+count = 0
+while states.length > 0
+  count += 1
+  if count%10000 == 0
+    puts "Working on state #{count}"
+    puts "#{states.length} states to go"
+    puts "Best length: #{best[1]}"
+    puts "Best state:"
+    puts statestr(best[0])
+  end
+  state = states.pop
+  @length.times do |i|
+    @length.times do |j|
+      k = i*@length + j
+      next if state[k] != Occupied
+
+      [-1, 1].each do |dir|
+        a, b = i, j + dir
+        next if b < 0 || b >= @length
+        c = a*@length + b
+        next if state[c] != Occupied
+        d, e = i, j+2*dir
+        next if e < 0 || e >= @length
+        f = d*@length + e
+        next if state[f] != Unoccupied
+        newstate = Array.new(state)
+        newstate[k] = Unoccupied
+        newstate[c] = Unoccupied
+        newstate[f] = Occupied
+        states.push(newstate)
+        cnt = count(newstate)
+        if cnt < best[1]
+          best = [newstate, cnt]
+        end
+      end
+
+      [-1, 1].each do |dir|
+        
+        a, b = i + dir, j
+        next if a < 0 || a >= @length
+        c = a*@length + b
+        next if state[c] != Occupied
+        d, e = i + 2*dir, j
+        next if d < 0 || d >= @length
+        f = d*@length + e
+        next if state[f] != Unoccupied
+        newstate = Array.new(state)
+        newstate[k] = Unoccupied
+        newstate[c] = Unoccupied
+        newstate[f] = Occupied
+        states.push(newstate)
+        cnt = count(newstate)
+        if cnt < best[1]
+          best = [newstate, cnt]
+        end
+      end
+    end
+  end
+end
+
+puts best[1]
+puts statestr(best[0])
+
