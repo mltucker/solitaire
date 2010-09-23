@@ -51,31 +51,33 @@ x x x x x x x
 : : x x x : :
 EOF
 
-start = strstate(startstr)
+start = [strstate(startstr)]
 
 def count(state)
   state.inject(0) {|x, y| y == Occupied ? x + 1 : x}
 end
 
 states = [start]
-best = [start, count(start)]
+best = [start, count(start.last)]
 
 count = 0
 while states.length > 0
+  break if best[1] == 1
   count += 1
   if count%10000 == 0
     puts "Working on state #{count}"
     puts "#{states.length} states to go"
     puts "Best length: #{best[1]}"
     puts "Best state:"
-    puts statestr(best[0])
+    puts statestr(best[0].last)
   end
-  state = states.pop
+  history = states.pop
+  state = history.last
   @length.times do |i|
     @length.times do |j|
       k = i*@length + j
       next if state[k] != Occupied
-
+      
       [-1, 1].each do |dir|
         a, b = i, j + dir
         next if b < 0 || b >= @length
@@ -89,10 +91,12 @@ while states.length > 0
         newstate[k] = Unoccupied
         newstate[c] = Unoccupied
         newstate[f] = Occupied
-        states.push(newstate)
+        newhist = Array.new history
+        newhist.push(newstate)
+        states.push(newhist)
         cnt = count(newstate)
         if cnt < best[1]
-          best = [newstate, cnt]
+          best = [newhist, cnt]
         end
       end
 
@@ -110,16 +114,20 @@ while states.length > 0
         newstate[k] = Unoccupied
         newstate[c] = Unoccupied
         newstate[f] = Occupied
-        states.push(newstate)
+        newhist = Array.new history
+        newhist.push(newstate)
+        states.push(newhist)
         cnt = count(newstate)
         if cnt < best[1]
-          best = [newstate, cnt]
+          best = [newhist, cnt]
         end
       end
     end
   end
 end
 
+puts "Went through #{count} states"
 puts best[1]
-puts statestr(best[0])
-
+best[0].each do |state|
+  puts statestr(state)
+end

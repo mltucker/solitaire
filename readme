@@ -34,3 +34,262 @@ until queue is empty
       if state in direction is x and 2nd state in direction is o
         create a new state by doing the jump
         enqueue the new state
+
+
+Here's what we got:
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x o x x x
+x x x x x x x
+: : x x x : :
+: : x x x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x o x x x
+: : x o x : :
+: : x x x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x x o o x
+: : x o x : :
+: : x x x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x x x o x
+: : x o o : :
+: : x x o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x x x o x
+: : x o o : :
+: : o o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x o o x x
+: : x o o : :
+: : o o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x x o x o o
+: : x o o : :
+: : o o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+x x o o x o o
+: : o o o : :
+: : x o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x x x
+o o x o x o o
+: : o o o : :
+: : x o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x o x x
+o o x o o o o
+: : o o x : :
+: : x o x : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x o x x
+o o x o x o o
+: : o o o : :
+: : x o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x x o o
+o o x o x o o
+: : o o o : :
+: : x o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x x x o o o
+o o x o o o o
+: : o o x : :
+: : x o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x o x o o o
+o o o o o o o
+: : x o x : :
+: : x o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+x x o x o o o
+o o x o o o o
+: : o o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+o o x x o o o
+o o x o o o o
+: : o o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x x : :
+x x x x x x x
+o o o x o o o
+o o o o o o o
+: : x o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x x x o x x
+o o o x x o o
+o o o o o o o
+: : x o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x x x x o o
+o o o x x o o
+o o o o o o o
+: : x o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x x x o o o
+o o o x o o o
+o o o o x o o
+: : x o x : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x x x o o o
+o o o x x o o
+o o o o o o o
+: : x o o : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x x x o o o
+o o x o o o o
+o o o o o o o
+: : x o o : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x o x o o o
+o o o o o o o
+o o x o o o o
+: : x o o : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+x x o x o o o
+o o x o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+o o x x o o o
+o o x o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : x x x : :
+: : x x o : :
+o x o o o o o
+o o x o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : o x x : :
+: : o x o : :
+o x x o o o o
+o o x o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : o x x : :
+: : x x o : :
+o x o o o o o
+o o o o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : x o o : :
+: : x x o : :
+o x o o o o o
+o o o o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : o o o : :
+: : o x o : :
+o x x o o o o
+o o o o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : o o o : :
+: : o x o : :
+o o o x o o o
+o o o o o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
+: : o o o : :
+: : o o o : :
+o o o o o o o
+o o o x o o o
+o o o o o o o
+: : o o o : :
+: : o o o : :
+
